@@ -24,6 +24,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Navigation */
@@ -31,8 +32,8 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: rgba(18, 18, 18, 0.95);
-            padding: 1rem 5%;
+            background-color: rgba(18, 18, 18, 0.98);
+            padding: 1.2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -44,6 +45,7 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-color);
+            cursor: pointer;
         }
 
         nav ul {
@@ -55,20 +57,52 @@
         nav ul li a {
             color: var(--text-main);
             text-decoration: none;
+            font-weight: 500;
             transition: color 0.3s;
+            padding-bottom: 5px;
         }
 
         nav ul li a:hover {
             color: var(--primary-color);
         }
 
-        /* Sections General */
+        /* Active link styling */
+        nav ul li a.active-link {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        /* Container untuk semua halaman */
+        main {
+            padding-top: 80px; /* Memberi ruang agar tidak tertutup navbar */
+            min-height: calc(100vh - 60px); /* Dikurangi tinggi footer */
+        }
+
+        /* Sections: Disembunyikan secara default */
         section {
-            padding: 100px 5%;
-            min-height: 100vh;
+            display: none; 
+            padding: 50px 5%;
+            min-height: 80vh;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        /* Section yang aktif akan ditampilkan */
+        section.active-page {
             display: flex;
             flex-direction: column;
             justify-content: center;
+        }
+
+        /* Animasi ganti halaman */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h2 {
@@ -82,6 +116,8 @@
             align-items: center;
             text-align: center;
             background: linear-gradient(180deg, rgba(30,30,30,1) 0%, rgba(18,18,18,1) 100%);
+            border-radius: 20px;
+            margin: 20px 5%;
         }
 
         #hero h1 {
@@ -104,6 +140,8 @@
             border-radius: 25px;
             font-weight: bold;
             transition: transform 0.3s, background-color 0.3s;
+            display: inline-block;
+            cursor: pointer;
         }
 
         .btn:hover {
@@ -124,6 +162,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
+            width: 100%;
         }
 
         .card {
@@ -135,12 +174,13 @@
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: var(--primary-color);
         }
 
         .card h3 {
             margin-bottom: 1rem;
+            color: var(--text-main);
         }
 
         /* Portfolio Section */
@@ -156,6 +196,7 @@
             flex-direction: column;
             gap: 1.5rem;
             margin-top: 2rem;
+            max-width: 800px;
         }
 
         .step {
@@ -175,11 +216,11 @@
         }
 
         input, textarea {
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #333;
             background-color: var(--surface-color);
             color: var(--text-main);
-            border-radius: 5px;
+            border-radius: 8px;
         }
 
         input:focus, textarea:focus {
@@ -187,26 +228,27 @@
             border-color: var(--primary-color);
         }
 
-        button {
-            cursor: pointer;
-            border: none;
-        }
-
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
             background-color: var(--surface-color);
             border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             nav ul {
-                display: none; /* Bisa dikembangkan jadi menu hamburger nanti */
+                gap: 1rem;
+                font-size: 0.9rem;
             }
             #hero h1 {
                 font-size: 2.5rem;
+            }
+            section {
+                padding: 30px 5%;
             }
         }
     </style>
@@ -215,124 +257,132 @@
 
     <!-- Navigasi -->
     <nav>
-        <div class="logo">LirikKu.</div>
+        <div class="logo" onclick="switchPage('hero')">LirikKu.</div>
         <ul>
-            <li><a href="#hero">Beranda</a></li>
-            <li><a href="#about">Tentang</a></li>
-            <li><a href="#services">Layanan</a></li>
-            <li><a href="#portfolio">Portofolio</a></li>
-            <li><a href="#contact">Kontak</a></li>
+            <li><a href="#hero" class="nav-link active-link" onclick="switchPage('hero')">Beranda</a></li>
+            <li><a href="#about" class="nav-link" onclick="switchPage('about')">Tentang</a></li>
+            <li><a href="#services" class="nav-link" onclick="switchPage('services')">Layanan</a></li>
+            <li><a href="#portfolio" class="nav-link" onclick="switchPage('portfolio')">Portofolio</a></li>
+            <li><a href="#contact" class="nav-link" onclick="switchPage('contact')">Kontak</a></li>
         </ul>
     </nav>
 
-    <!-- Beranda -->
-    <section id="hero">
-        <h1>Nyawakan Melodimu</h1>
-        <p>Setiap nada punya cerita. Saya bantu merangkai lirik orisinal yang bermakna dan menyatu dengan visi musikmu.</p>
-        <a href="#portfolio" class="btn">Dengarkan Portofolio</a>
-    </section>
+    <!-- Kontainer Utama -->
+    <main>
+        <!-- Beranda -->
+        <section id="hero" class="active-page">
+            <h1>Nyawakan Melodimu</h1>
+            <p>Setiap nada punya cerita. Saya bantu merangkai lirik orisinal yang bermakna dan menyatu dengan visi musikmu.</p>
+            <a onclick="switchPage('portfolio')" class="btn">Dengarkan Portofolio</a>
+        </section>
 
-    <!-- Tentang -->
-    <section id="about">
-        <h2>Cerita di Balik Lirik</h2>
-        <p>Bagi saya, bermain gitar dan menulis lirik bukan sekadar hobi, melainkan sebuah <i>safe zone</i> untuk berekspresi secara jujur. Dari sanalah lirik-lirik orisinal ini lahir. Saya percaya bahwa lirik yang kuat harus mampu menyampaikan emosi, meski hanya didengarkan sambil lalu.</p>
-    </section>
+        <!-- Tentang -->
+        <section id="about">
+            <h2>Cerita di Balik Lirik</h2>
+            <p>Bagi saya, bermain gitar dan menulis lirik bukan sekadar hobi, melainkan sebuah <i>safe zone</i> untuk berekspresi secara jujur. Dari sanalah lirik-lirik orisinal ini lahir. Saya percaya bahwa lirik yang kuat harus mampu menyampaikan emosi, bahkan ketika klien meresapinya dengan memakai <i>earphone</i> sebelah saja saat bersantai.</p>
+        </section>
 
-    <!-- Layanan -->
-    <section id="services">
-        <h2>Layanan & Paket</h2>
-        <div class="services-grid">
-            <div class="card">
-                <h3>Penulisan Lirik (Teks Saja)</h3>
-                <p>Cocok untuk kamu yang sudah memiliki nada vokal atau melodi yang matang. Cukup kirimkan demo <i>humming</i>, dan saya akan buatkan liriknya.</p>
+        <!-- Layanan -->
+        <section id="services">
+            <h2>Layanan & Paket</h2>
+            <div class="services-grid">
+                <div class="card">
+                    <h3>Penulisan Lirik Saja</h3>
+                    <p>Cocok untuk kamu yang sudah memiliki nada vokal atau melodi yang matang. Cukup kirimkan demo <i>humming</i>, dan saya akan buatkan liriknya.</p>
+                </div>
+                <div class="card">
+                    <h3>Lirik + Progresi Nada</h3>
+                    <p>Belum ada nada? Saya akan menulis lirik sekaligus menciptakan kerangka melodi dasar dengan iringan gitar agar langsung siap dikembangkan.</p>
+                </div>
+                <div class="card">
+                    <h3>Polishing (Poles Lirik)</h3>
+                    <p>Punya draf lirik tapi terasa kaku? Saya bantu merapikan diksi, rima, dan <i>flow</i>-nya agar lebih enak dinyanyikan.</p>
+                </div>
             </div>
-            <div class="card">
-                <h3>Lirik + Progresi Nada (Akustik)</h3>
-                <p>Belum ada nada? Saya akan menulis lirik sekaligus menciptakan kerangka melodi dasar dengan iringan gitar agar langsung siap dikembangkan.</p>
+            
+            <h2 style="margin-top: 3rem;">Cara Kerja</h2>
+            <div class="workflow-steps">
+                <div class="step"><strong>1. Briefing:</strong> Diskusi awal mengenai tema, mood, dan cerita lagu.</div>
+                <div class="step"><strong>2. Drafting:</strong> Pembuatan draf lirik awal (Verse & Chorus).</div>
+                <div class="step"><strong>3. Revisi:</strong> Penyesuaian kata agar pas dengan ritme dan nada.</div>
+                <div class="step"><strong>4. Handover:</strong> Penyerahan lirik utuh dan kesepakatan lisensi.</div>
             </div>
-            <div class="card">
-                <h3>Polishing (Poles Lirik)</h3>
-                <p>Punya draf lirik tapi terasa kaku? Saya bantu merapikan diksi, rima, dan <i>flow</i>-nya agar lebih enak dinyanyikan.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Portofolio -->
-    <section id="portfolio">
-        <h2>Karya Terdahulu</h2>
-        <p class="vibe-note">Tip: Pasang earphone sebelahmu, putar audionya, dan rasakan <i>vibe</i> ceritanya.</p>
-        <div class="services-grid">
-            <!-- Portofolio Item 1 -->
-            <div class="card">
-                <h3>"Ruang Aman" (Pop Akustik)</h3>
-                <p><i>"Di sela bisingnya hari... kucari satu resonansi..."</i></p>
-                <br>
-                <audio controls style="width: 100%; border-radius: 5px;">
-                    <!-- Ganti src dengan link audio aslimu nanti -->
-                    <source src="demo-lagu-1.mp3" type="audio/mpeg">
-                    Browser Anda tidak mendukung elemen audio.
-                </audio>
+        <!-- Portofolio -->
+        <section id="portfolio">
+            <h2>Karya Terdahulu</h2>
+            <p class="vibe-note">Tip: Pasang earphone-mu, putar audionya, dan rasakan <i>vibe</i> ceritanya.</p>
+            <div class="services-grid">
+                <div class="card">
+                    <h3>"Ruang Aman" (Pop Akustik)</h3>
+                    <p><i>"Di sela bisingnya hari... kucari satu resonansi..."</i></p>
+                    <br>
+                    <audio controls style="width: 100%; border-radius: 5px;">
+                        <source src="demo-lagu-1.mp3" type="audio/mpeg">
+                        Browser Anda tidak mendukung elemen audio.
+                    </audio>
+                </div>
+                <div class="card">
+                    <h3>"Batas Kota" (Indie Folk)</h3>
+                    <p><i>"Melangkah jauh dari sini... tinggalkan bayang yang tak pasti..."</i></p>
+                    <br>
+                    <audio controls style="width: 100%; border-radius: 5px;">
+                        <source src="demo-lagu-2.mp3" type="audio/mpeg">
+                        Browser Anda tidak mendukung elemen audio.
+                    </audio>
+                </div>
             </div>
-            <!-- Portofolio Item 2 -->
-            <div class="card">
-                <h3>"Batas Kota" (Indie Folk)</h3>
-                <p><i>"Melangkah jauh dari sini... tinggalkan bayang yang tak pasti..."</i></p>
-                <br>
-                <audio controls style="width: 100%; border-radius: 5px;">
-                    <source src="demo-lagu-2.mp3" type="audio/mpeg">
-                    Browser Anda tidak mendukung elemen audio.
-                </audio>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Alur Kerja -->
-    <section id="workflow">
-        <h2>Cara Kerja</h2>
-        <div class="workflow-steps">
-            <div class="step">
-                <strong>1. Briefing:</strong> Kita diskusi soal tema, mood, dan cerita yang ingin diangkat di lagu tersebut.
-            </div>
-            <div class="step">
-                <strong>2. Drafting:</strong> Pembuatan draf lirik (biasanya Verse 1 & Chorus) untuk memastikan arahnya sudah sesuai.
-            </div>
-            <div class="step">
-                <strong>3. Revisi:</strong> Penyesuaian kata-kata yang mungkin kurang pas saat dinyanyikan dengan nadanya.
-            </div>
-            <div class="step">
-                <strong>4. Final Handover:</strong> Penyerahan lirik utuh dan kesepakatan penggunaan (hak cipta/kredit).
-            </div>
-        </div>
-    </section>
-
-    <!-- Kontak -->
-    <section id="contact">
-        <h2>Mulai Proyekmu</h2>
-        <p>Punya melodi yang butuh nyawa? Mari berkolaborasi.</p>
-        <form action="#" method="POST" id="contactForm">
-            <input type="text" placeholder="Nama Kamu atau Band" required>
-            <input type="email" placeholder="Email" required>
-            <textarea rows="4" placeholder="Ceritakan sedikit tentang lagumu (genre, mood, atau tema)..." required></textarea>
-            <button type="submit" class="btn">Kirim Pesan</button>
-        </form>
-    </section>
+        <!-- Kontak -->
+        <section id="contact">
+            <h2>Mulai Proyekmu</h2>
+            <p>Punya melodi yang butuh nyawa? Mari berkolaborasi.</p>
+            <form action="#" method="POST" id="contactForm">
+                <input type="text" placeholder="Nama Kamu atau Band" required>
+                <input type="email" placeholder="Email" required>
+                <textarea rows="4" placeholder="Ceritakan sedikit tentang lagumu (genre, mood, atau tema)..." required></textarea>
+                <button type="submit" class="btn">Kirim Pesan</button>
+            </form>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 LirikKu. Dirancang dengan sepenuh hati.</p>
     </footer>
 
-    <!-- JavaScript untuk Smooth Scrolling -->
+    <!-- JavaScript untuk Navigasi Antar Halaman (SPA) -->
     <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        function switchPage(pageId) {
+            // 1. Sembunyikan semua halaman
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active-page');
             });
-        });
 
+            // 2. Tampilkan halaman yang dituju
+            const activeSection = document.getElementById(pageId);
+            if(activeSection) {
+                activeSection.classList.add('active-page');
+            }
+
+            // 3. Update status warna pada menu navigasi
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active-link');
+                // Mengecek apakah href pada link sama dengan ID halaman
+                if (link.getAttribute('href') === '#' + pageId) {
+                    link.classList.add('active-link');
+                }
+            });
+
+            // Gulir kembali ke atas saat pindah halaman
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Simulasi tombol kirim formulir
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Terima kasih! Pesan kamu sudah terkirim (Ini hanya simulasi UI).');
