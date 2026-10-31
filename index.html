@@ -8,7 +8,7 @@
         :root {
             --bg-color: #121212;
             --surface-color: #1e1e1e;
-            --primary-color: #FF9500; /* iOS Orange accent */
+            --primary-color: #FF9500; /* iOS Orange */
             --text-main: #f8f9fa;
             --text-muted: #adb5bd;
         }
@@ -25,6 +25,7 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         /* Navigation */
@@ -63,17 +64,15 @@
             padding-bottom: 5px;
         }
 
-        nav ul li a:hover {
+        nav ul li a:hover, nav ul li a.active-link {
             color: var(--primary-color);
         }
 
-        /* Active link styling */
         nav ul li a.active-link {
-            color: var(--primary-color);
             border-bottom: 2px solid var(--primary-color);
         }
 
-        /* Container untuk semua halaman */
+        /* Main Container */
         main {
             padding-top: 80px; 
             min-height: calc(100vh - 60px); 
@@ -94,14 +93,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h2 {
@@ -110,7 +103,7 @@
             color: var(--primary-color);
         }
 
-        /* Hero Section */
+        /* Hero Section & Typewriter */
         #hero {
             align-items: center;
             text-align: center;
@@ -121,13 +114,24 @@
 
         #hero h1 {
             font-size: 3.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .typewriter-text {
+            color: var(--primary-color);
+            border-right: 3px solid var(--primary-color);
+            padding-right: 5px;
+            animation: blinkCursor 0.7s infinite;
+        }
+
+        @keyframes blinkCursor {
+            50% { border-right-color: transparent; }
         }
 
         #hero p {
             font-size: 1.2rem;
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            margin: 1.5rem 0 2.5rem 0;
             max-width: 600px;
         }
 
@@ -138,25 +142,27 @@
             text-decoration: none;
             border-radius: 25px;
             font-weight: bold;
-            transition: transform 0.3s, background-color 0.3s;
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
             display: inline-block;
             cursor: pointer;
+            border: none;
         }
 
         .btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
             background-color: #e68600;
+            box-shadow: 0 10px 20px rgba(255, 149, 0, 0.2);
         }
 
-        /* About Section */
-        #about p {
+        /* General Content styling */
+        .content-text {
             font-size: 1.1rem;
             max-width: 800px;
             color: var(--text-muted);
             margin-bottom: 1.5rem;
         }
 
-        /* Services Section */
+        /* Cards Grid */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -168,35 +174,106 @@
         .card {
             background-color: var(--surface-color);
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
             border: 1px solid #333;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
         }
 
         .card:hover {
             transform: translateY(-5px);
             border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .card h3 {
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
+        /* Portfolio Specifics */
+        .lyric-container {
+            color: #e0e0e0; 
+            font-style: italic; 
+            font-size: 1.1rem; 
+            line-height: 1.8; 
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .lyric-stanza {
+            padding: 10px;
+            border-radius: 8px;
+            transition: background-color 0.3s, text-shadow 0.3s;
         }
 
-        /* Workflow Section */
-        .workflow-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 2rem;
-            max-width: 800px;
+        /* Interactive Highlight Effect on hover */
+        .lyric-stanza:hover {
+            background-color: rgba(255, 149, 0, 0.05);
+            text-shadow: 0 0 8px rgba(255, 149, 0, 0.3);
+            color: #fff;
         }
 
-        .step {
+        .lyric-tag {
+            color: var(--text-muted); 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            font-style: normal; 
+            margin-top: 15px; 
+            margin-bottom: 5px;
+        }
+
+        .badge-coming-soon {
+            display: inline-block;
+            background-color: #2a2a2a;
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px dashed var(--primary-color);
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
             background-color: var(--surface-color);
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border: 1px solid #333;
+            overflow: hidden;
+        }
+
+        .faq-question {
             padding: 1.5rem;
-            border-left: 4px solid var(--primary-color);
-            border-radius: 0 10px 10px 0;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .faq-answer p {
+            padding-bottom: 1.5rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--primary-color);
         }
 
         /* Contact Section */
@@ -209,11 +286,12 @@
         }
 
         input, textarea {
-            padding: 12px;
+            padding: 15px;
             border: 1px solid #333;
             background-color: var(--surface-color);
             color: var(--text-main);
             border-radius: 8px;
+            transition: border-color 0.3s;
         }
 
         input:focus, textarea:focus {
@@ -231,18 +309,10 @@
             color: var(--text-muted);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-            #hero h1 {
-                font-size: 2.5rem;
-            }
-            section {
-                padding: 30px 5%;
-            }
+            nav ul { gap: 1rem; font-size: 0.9rem; }
+            #hero h1 { font-size: 2.5rem; }
+            section { padding: 30px 5%; }
         }
     </style>
 </head>
@@ -256,6 +326,7 @@
             <li><a href="#about" class="nav-link" onclick="switchPage('about')">Tentang</a></li>
             <li><a href="#services" class="nav-link" onclick="switchPage('services')">Layanan</a></li>
             <li><a href="#portfolio" class="nav-link" onclick="switchPage('portfolio')">Portofolio</a></li>
+            <li><a href="#faq" class="nav-link" onclick="switchPage('faq')">FAQ</a></li>
             <li><a href="#contact" class="nav-link" onclick="switchPage('contact')">Kontak</a></li>
         </ul>
     </nav>
@@ -264,16 +335,16 @@
     <main>
         <!-- Beranda -->
         <section id="hero" class="active-page">
-            <h1>Nyawakan Melodimu</h1>
+            <h1>Nyawakan <br><span class="typewriter-text" id="typewriter"></span></h1>
             <p>Setiap nada punya cerita. Saya bantu merangkai lirik orisinal yang hangat, bermakna, dan menyatu dengan visi musikmu.</p>
-            <a onclick="switchPage('portfolio')" class="btn">Dengarkan Portofolio</a>
+            <a onclick="switchPage('portfolio')" class="btn">Lihat Karya Saya</a>
         </section>
 
         <!-- Tentang -->
         <section id="about">
             <h2>Cerita di Balik Lirik</h2>
-            <p>Bagi saya, bermain gitar dan merangkai kata bukan sekadar hobi, melainkan sebuah <i>safe zone</i> untuk berekspresi secara terbuka dan jujur. Dari ruang itulah karya-karya ini lahir.</p>
-            <p>Saya percaya lirik yang kuat harus mampu menyampaikan emosi secara sederhana namun mendalam, bahkan ketika pendengarnya hanya meresapi lagu tersebut dengan <i>earphone</i> sebelah saat sedang bersantai.</p>
+            <p class="content-text">Bagi saya, bermain gitar dan merangkai kata bukan sekadar hobi, melainkan sebuah <i>safe zone</i> untuk berekspresi secara terbuka dan jujur. Dari ruang itulah karya-karya ini lahir.</p>
+            <p class="content-text">Saya percaya lirik yang kuat harus mampu menyampaikan emosi secara sederhana namun mendalam, bahkan ketika pendengarnya hanya meresapi lagu tersebut dengan <i>earphone</i> sebelah saat sedang bersantai.</p>
         </section>
 
         <!-- Layanan -->
@@ -281,73 +352,91 @@
             <h2>Layanan & Paket</h2>
             <div class="services-grid">
                 <div class="card">
-                    <h3>Penulisan Lirik Saja</h3>
-                    <p>Cocok untuk kamu yang sudah memiliki nada vokal atau melodi yang matang. Cukup kirimkan demo <i>humming</i>, dan saya akan buatkan liriknya.</p>
+                    <h3 style="color: var(--primary-color); margin-bottom: 10px;">Penulisan Lirik Saja</h3>
+                    <p class="content-text" style="font-size: 1rem;">Cocok untuk kamu yang sudah memiliki nada vokal atau melodi yang matang. Cukup kirimkan demo <i>humming</i>, dan saya akan buatkan liriknya.</p>
                 </div>
                 <div class="card">
-                    <h3>Lirik + Progresi Nada</h3>
-                    <p>Belum ada nada? Saya akan menulis lirik sekaligus menciptakan kerangka melodi dasar (termasuk progresi chord) dengan iringan gitar akustik agar siap dikembangkan.</p>
+                    <h3 style="color: var(--primary-color); margin-bottom: 10px;">Lirik + Progresi Nada</h3>
+                    <p class="content-text" style="font-size: 1rem;">Belum ada nada? Saya akan menulis lirik sekaligus menciptakan kerangka melodi dasar (progresi chord) dengan iringan gitar akustik.</p>
                 </div>
                 <div class="card">
-                    <h3>Polishing (Poles Lirik)</h3>
-                    <p>Punya draf lirik tapi terasa kaku? Saya bantu merapikan diksi, rima, dan <i>flow</i>-nya agar lebih enak dinyanyikan.</p>
+                    <h3 style="color: var(--primary-color); margin-bottom: 10px;">Polishing (Poles Lirik)</h3>
+                    <p class="content-text" style="font-size: 1rem;">Punya draf lirik tapi terasa kaku? Saya bantu merapikan diksi, rima, dan <i>flow</i>-nya agar lebih enak dinyanyikan.</p>
                 </div>
-            </div>
-            
-            <h2 style="margin-top: 4rem;">Cara Kerja</h2>
-            <div class="workflow-steps">
-                <div class="step"><strong>1. Briefing:</strong> Diskusi awal mengenai tema, mood, dan cerita lagu.</div>
-                <div class="step"><strong>2. Drafting:</strong> Pembuatan draf lirik awal (Verse & Chorus).</div>
-                <div class="step"><strong>3. Revisi:</strong> Penyesuaian kata agar pas dengan ritme dan nada.</div>
-                <div class="step"><strong>4. Handover:</strong> Penyerahan lirik utuh dan kesepakatan penggunaan.</div>
             </div>
         </section>
 
         <!-- Portofolio -->
         <section id="portfolio">
-            <h2>Karya Terdahulu</h2>
-            <p style="margin-bottom: 2rem; font-style: italic; color: var(--text-muted);">Tip: Pasang earphone-mu, putar audionya, dan rasakan vibe ceritanya.</p>
+            <h2>Karya Orisinal</h2>
+            <p class="content-text">Arahkan kursor ke lirik untuk meresapi maknanya.</p>
             
             <div class="services-grid">
-                <!-- Karya Orisinal 1 -->
-                <div class="card" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto;">
+                <div class="card" style="grid-column: 1 / -1; max-width: 700px; margin: 0 auto;">
                     <h3>"Sederhana Namun Bahagia"</h3>
                     <p style="font-size: 0.9rem; color: var(--primary-color); margin-bottom: 1.5rem; font-weight: 500;">
                         Vibe: Indie Pop / Pop Akustik<br>
                         Usulan Progresi: Cmaj7 - Dm7 - Em7 - F
                     </p>
                     
-                    <div style="color: #e0e0e0; font-style: italic; font-size: 1rem; line-height: 1.8; margin-bottom: 2rem;">
-                        <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: bold; font-style: normal; margin-bottom: 5px;">[Verse 1]</p>
-                        <p>
+                    <div class="lyric-container">
+                        <div class="lyric-stanza">
+                            <div class="lyric-tag">[Verse 1]</div>
                             melangkah kita tak tahu arah tuju<br>
                             berdua merangkai kisah indah ooo<br>
                             bersamamu selalu ceria<br>
                             tak ada lagi rasa gundahh
-                        </p>
+                        </div>
                         
-                        <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: bold; font-style: normal; margin-top: 15px; margin-bottom: 5px;">[Reff]</p>
-                        <p>
+                        <div class="lyric-stanza">
+                            <div class="lyric-tag">[Chorus]</div>
                             ingin ku lakukan semua denganmu<br>
                             dari berlari diujung senja<br>
                             hingga bermain dibawah hujan<br>
                             sederhana namun bahagia<br>
                             kita kan lewati semuaa
-                        </p>
+                        </div>
 
-                        <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: bold; font-style: normal; margin-top: 15px; margin-bottom: 5px;">[Verse 2]</p>
-                        <p>
+                        <div class="lyric-stanza">
+                            <div class="lyric-tag">[Verse 2]</div>
                             banyak alasanku slalu cinta<br>
                             karena senyummu yang tak biasa<br>
                             bersamamu selalu ceria<br>
                             tak ada lagi rasa gundah
-                        </p>
+                        </div>
                     </div>
                     
-                    <audio controls style="width: 100%; border-radius: 5px; background-color: #2a2a2a;">
-                        <source src="demo-akustik.mp3" type="audio/mpeg">
-                        Browser Anda tidak mendukung elemen audio.
-                    </audio>
+                    <!-- Pengganti Audio Player Box -->
+                    <div class="badge-coming-soon">
+                        🎵 Demo Audio Sedang Direkam (Segera Rilis)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section Baru -->
+        <section id="faq">
+            <h2>Tanya Jawab (FAQ)</h2>
+            <p class="content-text">Beberapa hal yang sering ditanyakan klien sebelum memulai proyek.</p>
+            
+            <div style="max-width: 800px; width: 100%; margin-top: 2rem;">
+                <div class="faq-item">
+                    <button class="faq-question">Bagaimana dengan hak cipta liriknya? <span>+</span></button>
+                    <div class="faq-answer">
+                        <p>Sistem standarnya adalah <i>Ghostwriting</i>, yang berarti klien bebas memiliki hak penuh 100% atas lagu tersebut tanpa perlu mencantumkan nama saya. Jika ingin memasukkan saya sebagai <i>Co-writer</i>, biayanya bisa disesuaikan.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Apakah ada batas jumlah revisi? <span>+</span></button>
+                    <div class="faq-answer">
+                        <p>Setiap paket dilengkapi dengan maksimal 2x revisi minor (seperti mengubah diksi atau menyesuaikan ketukan). Jika ingin merombak seluruh tema dari awal, akan dihitung sebagai proyek baru.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Berapa lama waktu pengerjaannya? <span>+</span></button>
+                    <div class="faq-answer">
+                        <p>Untuk penulisan lirik saja biasanya memakan waktu 3-5 hari kerja. Untuk paket pembuatan lirik beserta progresi melodi akustik, estimasi pengerjaan adalah 7-10 hari kerja.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -355,7 +444,7 @@
         <!-- Kontak -->
         <section id="contact">
             <h2>Mulai Proyekmu</h2>
-            <p>Punya melodi yang butuh nyawa? Mari berkolaborasi.</p>
+            <p class="content-text">Mari berkolaborasi merangkai nada dan cerita.</p>
             <form action="#" method="POST" id="contactForm">
                 <input type="text" placeholder="Nama Kamu atau Band" required>
                 <input type="email" placeholder="Email" required>
@@ -370,8 +459,9 @@
         <p>&copy; 2026 LirikKu. Dirancang dengan sepenuh hati.</p>
     </footer>
 
-    <!-- JavaScript untuk Navigasi Antar Halaman (SPA) -->
+    <!-- JavaScript -->
     <script>
+        // 1. SPA Navigation Logic
         function switchPage(pageId) {
             const sections = document.querySelectorAll('section');
             sections.forEach(section => {
@@ -394,9 +484,75 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // 2. Typewriter Effect Logic
+        const words = ["Melodimu", "Ceritamu", "Keresahanmu"];
+        let i = 0;
+        let timer;
+        
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typewriter').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000); // Tunggu 2 detik sebelum dihapus
+                    return false;
+                };
+                timer = setTimeout(loopTyping, 150);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typewriter').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) {
+                        i++;
+                    } else {
+                        i = 0;
+                    };
+                    typingEffect();
+                    return false;
+                };
+                timer = setTimeout(loopDeleting, 100);
+            };
+            loopDeleting();
+        }
+        // Jalankan animasi ketik saat pertama kali dimuat
+        typingEffect();
+
+        // 3. FAQ Accordion Logic
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const parent = question.parentElement;
+                
+                // Tutup FAQ lain jika terbuka
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if(item !== parent) {
+                        item.classList.remove('active');
+                        item.querySelector('span').innerText = '+';
+                    }
+                });
+
+                // Toggle FAQ yang di-klik
+                parent.classList.toggle('active');
+                if(parent.classList.contains('active')) {
+                    question.querySelector('span').innerText = '-';
+                } else {
+                    question.querySelector('span').innerText = '+';
+                }
+            });
+        });
+
+        // 4. Contact Form Simulation
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Terima kasih! Pesan kamu sudah terkirim (Ini hanya simulasi UI).');
+            alert('Terima kasih! Pesan kamu sudah terkirim.');
             this.reset();
         });
     </script>
