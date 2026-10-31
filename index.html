@@ -8,7 +8,7 @@
         :root {
             --bg-color: #121212;
             --surface-color: #1e1e1e;
-            --primary-color: #ffb703;
+            --primary-color: #FF9500; /* iOS Orange accent */
             --text-main: #f8f9fa;
             --text-muted: #adb5bd;
         }
@@ -39,6 +39,7 @@
             align-items: center;
             z-index: 1000;
             border-bottom: 1px solid #333;
+            backdrop-filter: blur(10px);
         }
 
         nav .logo {
@@ -74,11 +75,11 @@
 
         /* Container untuk semua halaman */
         main {
-            padding-top: 80px; /* Memberi ruang agar tidak tertutup navbar */
-            min-height: calc(100vh - 60px); /* Dikurangi tinggi footer */
+            padding-top: 80px; 
+            min-height: calc(100vh - 60px); 
         }
 
-        /* Sections: Disembunyikan secara default */
+        /* Sections */
         section {
             display: none; 
             padding: 50px 5%;
@@ -86,14 +87,12 @@
             animation: fadeIn 0.4s ease-in-out;
         }
 
-        /* Section yang aktif akan ditampilkan */
         section.active-page {
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        /* Animasi ganti halaman */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -146,7 +145,7 @@
 
         .btn:hover {
             transform: scale(1.05);
-            background-color: #e5a400;
+            background-color: #e68600;
         }
 
         /* About Section */
@@ -154,6 +153,7 @@
             font-size: 1.1rem;
             max-width: 800px;
             color: var(--text-muted);
+            margin-bottom: 1.5rem;
         }
 
         /* Services Section */
@@ -179,15 +179,8 @@
         }
 
         .card h3 {
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             color: var(--text-main);
-        }
-
-        /* Portfolio Section */
-        #portfolio .vibe-note {
-            margin-bottom: 2rem;
-            font-style: italic;
-            color: var(--text-muted);
         }
 
         /* Workflow Section */
@@ -272,14 +265,15 @@
         <!-- Beranda -->
         <section id="hero" class="active-page">
             <h1>Nyawakan Melodimu</h1>
-            <p>Setiap nada punya cerita. Saya bantu merangkai lirik orisinal yang bermakna dan menyatu dengan visi musikmu.</p>
+            <p>Setiap nada punya cerita. Saya bantu merangkai lirik orisinal yang hangat, bermakna, dan menyatu dengan visi musikmu.</p>
             <a onclick="switchPage('portfolio')" class="btn">Dengarkan Portofolio</a>
         </section>
 
         <!-- Tentang -->
         <section id="about">
             <h2>Cerita di Balik Lirik</h2>
-            <p>Bagi saya, bermain gitar dan menulis lirik bukan sekadar hobi, melainkan sebuah <i>safe zone</i> untuk berekspresi secara jujur. Dari sanalah lirik-lirik orisinal ini lahir. Saya percaya bahwa lirik yang kuat harus mampu menyampaikan emosi, bahkan ketika klien meresapinya dengan memakai <i>earphone</i> sebelah saja saat bersantai.</p>
+            <p>Bagi saya, bermain gitar dan merangkai kata bukan sekadar hobi, melainkan sebuah <i>safe zone</i> untuk berekspresi secara terbuka dan jujur. Dari ruang itulah karya-karya ini lahir.</p>
+            <p>Saya percaya lirik yang kuat harus mampu menyampaikan emosi secara sederhana namun mendalam, bahkan ketika pendengarnya hanya meresapi lagu tersebut dengan <i>earphone</i> sebelah saat sedang bersantai.</p>
         </section>
 
         <!-- Layanan -->
@@ -292,7 +286,7 @@
                 </div>
                 <div class="card">
                     <h3>Lirik + Progresi Nada</h3>
-                    <p>Belum ada nada? Saya akan menulis lirik sekaligus menciptakan kerangka melodi dasar dengan iringan gitar agar langsung siap dikembangkan.</p>
+                    <p>Belum ada nada? Saya akan menulis lirik sekaligus menciptakan kerangka melodi dasar (termasuk progresi chord) dengan iringan gitar akustik agar siap dikembangkan.</p>
                 </div>
                 <div class="card">
                     <h3>Polishing (Poles Lirik)</h3>
@@ -300,35 +294,58 @@
                 </div>
             </div>
             
-            <h2 style="margin-top: 3rem;">Cara Kerja</h2>
+            <h2 style="margin-top: 4rem;">Cara Kerja</h2>
             <div class="workflow-steps">
                 <div class="step"><strong>1. Briefing:</strong> Diskusi awal mengenai tema, mood, dan cerita lagu.</div>
                 <div class="step"><strong>2. Drafting:</strong> Pembuatan draf lirik awal (Verse & Chorus).</div>
                 <div class="step"><strong>3. Revisi:</strong> Penyesuaian kata agar pas dengan ritme dan nada.</div>
-                <div class="step"><strong>4. Handover:</strong> Penyerahan lirik utuh dan kesepakatan lisensi.</div>
+                <div class="step"><strong>4. Handover:</strong> Penyerahan lirik utuh dan kesepakatan penggunaan.</div>
             </div>
         </section>
 
         <!-- Portofolio -->
         <section id="portfolio">
             <h2>Karya Terdahulu</h2>
-            <p class="vibe-note">Tip: Pasang earphone-mu, putar audionya, dan rasakan <i>vibe</i> ceritanya.</p>
+            <p style="margin-bottom: 2rem; font-style: italic; color: var(--text-muted);">Tip: Pasang earphone-mu, putar audionya, dan rasakan vibe ceritanya.</p>
+            
             <div class="services-grid">
-                <div class="card">
-                    <h3>"Ruang Aman" (Pop Akustik)</h3>
-                    <p><i>"Di sela bisingnya hari... kucari satu resonansi..."</i></p>
-                    <br>
-                    <audio controls style="width: 100%; border-radius: 5px;">
-                        <source src="demo-lagu-1.mp3" type="audio/mpeg">
-                        Browser Anda tidak mendukung elemen audio.
-                    </audio>
-                </div>
-                <div class="card">
-                    <h3>"Batas Kota" (Indie Folk)</h3>
-                    <p><i>"Melangkah jauh dari sini... tinggalkan bayang yang tak pasti..."</i></p>
-                    <br>
-                    <audio controls style="width: 100%; border-radius: 5px;">
-                        <source src="demo-lagu-2.mp3" type="audio/mpeg">
+                <!-- Karya Orisinal 1 -->
+                <div class="card" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto;">
+                    <h3>"Sederhana Namun Bahagia"</h3>
+                    <p style="font-size: 0.9rem; color: var(--primary-color); margin-bottom: 1.5rem; font-weight: 500;">
+                        Vibe: Indie Pop / Pop Akustik<br>
+                        Usulan Progresi: Cmaj7 - Dm7 - Em7 - F
+                    </p>
+                    
+                    <div style="color: #e0e0e0; font-style: italic; font-size: 1rem; line-height: 1.8; margin-bottom: 2rem;">
+                        <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: bold; font-style: normal; margin-bottom: 5px;">[Verse 1]</p>
+                        <p>
+                            melangkah kita tak tahu arah tuju<br>
+                            berdua merangkai kisah indah ooo<br>
+                            bersamamu selalu ceria<br>
+                            tak ada lagi rasa gundahh
+                        </p>
+                        
+                        <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: bold; font-style: normal; margin-top: 15px; margin-bottom: 5px;">[Reff]</p>
+                        <p>
+                            ingin ku lakukan semua denganmu<br>
+                            dari berlari diujung senja<br>
+                            hingga bermain dibawah hujan<br>
+                            sederhana namun bahagia<br>
+                            kita kan lewati semuaa
+                        </p>
+
+                        <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: bold; font-style: normal; margin-top: 15px; margin-bottom: 5px;">[Verse 2]</p>
+                        <p>
+                            banyak alasanku slalu cinta<br>
+                            karena senyummu yang tak biasa<br>
+                            bersamamu selalu ceria<br>
+                            tak ada lagi rasa gundah
+                        </p>
+                    </div>
+                    
+                    <audio controls style="width: 100%; border-radius: 5px; background-color: #2a2a2a;">
+                        <source src="demo-akustik.mp3" type="audio/mpeg">
                         Browser Anda tidak mendukung elemen audio.
                     </audio>
                 </div>
@@ -356,33 +373,27 @@
     <!-- JavaScript untuk Navigasi Antar Halaman (SPA) -->
     <script>
         function switchPage(pageId) {
-            // 1. Sembunyikan semua halaman
             const sections = document.querySelectorAll('section');
             sections.forEach(section => {
                 section.classList.remove('active-page');
             });
 
-            // 2. Tampilkan halaman yang dituju
             const activeSection = document.getElementById(pageId);
             if(activeSection) {
                 activeSection.classList.add('active-page');
             }
 
-            // 3. Update status warna pada menu navigasi
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.classList.remove('active-link');
-                // Mengecek apakah href pada link sama dengan ID halaman
                 if (link.getAttribute('href') === '#' + pageId) {
                     link.classList.add('active-link');
                 }
             });
 
-            // Gulir kembali ke atas saat pindah halaman
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Simulasi tombol kirim formulir
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Terima kasih! Pesan kamu sudah terkirim (Ini hanya simulasi UI).');
