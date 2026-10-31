@@ -103,7 +103,7 @@
             color: var(--primary-color);
         }
 
-        /* Hero Section & Typewriter */
+        /* Hero Section */
         #hero {
             align-items: center;
             text-align: center;
@@ -154,7 +154,6 @@
             box-shadow: 0 10px 20px rgba(255, 149, 0, 0.2);
         }
 
-        /* General Content styling */
         .content-text {
             font-size: 1.1rem;
             max-width: 800px;
@@ -185,47 +184,56 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Portfolio Specifics */
+        /* Portfolio Specifics: Custom Backgrounds per Vibe */
+        .card.vibe-senja {
+            background: linear-gradient(145deg, #1e1e1e 0%, #2a1b0a 100%);
+        }
+        .card.vibe-rumah {
+            background: linear-gradient(145deg, #1e1e1e 0%, #26181b 100%);
+        }
+        .card.vibe-harmoni {
+            background: linear-gradient(145deg, #1e1e1e 0%, #0d2127 100%);
+        }
+
         .lyric-container {
             color: #e0e0e0; 
             font-style: italic; 
             font-size: 1.1rem; 
             line-height: 1.8; 
             margin-bottom: 2rem;
-            transition: all 0.3s ease;
         }
         
         .lyric-stanza {
-            padding: 10px;
+            padding: 10px 15px;
             border-radius: 8px;
             transition: background-color 0.3s, text-shadow 0.3s;
+            margin-bottom: 5px;
         }
 
-        /* Interactive Highlight Effect on hover */
         .lyric-stanza:hover {
-            background-color: rgba(255, 149, 0, 0.05);
-            text-shadow: 0 0 8px rgba(255, 149, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.05);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
             color: #fff;
         }
 
         .lyric-tag {
-            color: var(--text-muted); 
+            color: var(--primary-color); 
             font-size: 0.85rem; 
             font-weight: bold; 
             font-style: normal; 
-            margin-top: 15px; 
             margin-bottom: 5px;
+            opacity: 0.8;
         }
 
         .badge-coming-soon {
             display: inline-block;
-            background-color: #2a2a2a;
-            color: var(--primary-color);
+            background-color: rgba(0,0,0,0.3);
+            color: var(--text-muted);
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
-            border: 1px dashed var(--primary-color);
+            border: 1px solid #444;
         }
 
         /* FAQ Accordion */
@@ -236,7 +244,6 @@
             border: 1px solid #333;
             overflow: hidden;
         }
-
         .faq-question {
             padding: 1.5rem;
             width: 100%;
@@ -249,13 +256,7 @@
             cursor: pointer;
             display: flex;
             justify-content: space-between;
-            align-items: center;
         }
-
-        .faq-question:hover {
-            color: var(--primary-color);
-        }
-
         .faq-answer {
             max-height: 0;
             overflow: hidden;
@@ -263,18 +264,8 @@
             padding: 0 1.5rem;
             color: var(--text-muted);
         }
-
-        .faq-answer p {
-            padding-bottom: 1.5rem;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 200px;
-        }
-
-        .faq-item.active .faq-question {
-            color: var(--primary-color);
-        }
+        .faq-item.active .faq-answer { max-height: 200px; }
+        .faq-item.active .faq-question { color: var(--primary-color); }
 
         /* Contact Section */
         form {
@@ -284,22 +275,18 @@
             max-width: 500px;
             margin-top: 2rem;
         }
-
         input, textarea {
             padding: 15px;
             border: 1px solid #333;
             background-color: var(--surface-color);
             color: var(--text-main);
             border-radius: 8px;
-            transition: border-color 0.3s;
         }
-
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-color);
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 1.5rem;
@@ -357,7 +344,7 @@
                 </div>
                 <div class="card">
                     <h3 style="color: var(--primary-color); margin-bottom: 10px;">Lirik + Progresi Nada</h3>
-                    <p class="content-text" style="font-size: 1rem;">Belum ada nada? Saya akan menulis lirik sekaligus menciptakan kerangka melodi dasar (progresi chord) dengan iringan gitar akustik.</p>
+                    <p class="content-text" style="font-size: 1rem;">Belum ada nada? Saya akan menulis lirik sekaligus menciptakan kerangka melodi dasar dengan progresi chord iringan akustik.</p>
                 </div>
                 <div class="card">
                     <h3 style="color: var(--primary-color); margin-bottom: 10px;">Polishing (Poles Lirik)</h3>
@@ -371,14 +358,15 @@
             <h2>Karya Orisinal</h2>
             <p class="content-text">Arahkan kursor ke lirik untuk meresapi maknanya.</p>
             
-            <div class="services-grid">
-                <div class="card" style="grid-column: 1 / -1; max-width: 700px; margin: 0 auto;">
+            <div class="services-grid" style="grid-template-columns: 1fr; max-width: 800px; margin: 0 auto;">
+                
+                <!-- Lagu 1: Vibe Senja/Peach Hangat -->
+                <div class="card vibe-senja">
                     <h3>"Sederhana Namun Bahagia"</h3>
-                    <p style="font-size: 0.9rem; color: var(--primary-color); margin-bottom: 1.5rem; font-weight: 500;">
+                    <p style="font-size: 0.9rem; color: #ffb74d; margin-bottom: 1.5rem; font-weight: 500;">
                         Vibe: Indie Pop / Pop Akustik<br>
                         Usulan Progresi: Cmaj7 - Dm7 - Em7 - F
                     </p>
-                    
                     <div class="lyric-container">
                         <div class="lyric-stanza">
                             <div class="lyric-tag">[Verse 1]</div>
@@ -387,7 +375,6 @@
                             bersamamu selalu ceria<br>
                             tak ada lagi rasa gundahh
                         </div>
-                        
                         <div class="lyric-stanza">
                             <div class="lyric-tag">[Chorus]</div>
                             ingin ku lakukan semua denganmu<br>
@@ -396,7 +383,6 @@
                             sederhana namun bahagia<br>
                             kita kan lewati semuaa
                         </div>
-
                         <div class="lyric-stanza">
                             <div class="lyric-tag">[Verse 2]</div>
                             banyak alasanku slalu cinta<br>
@@ -405,37 +391,96 @@
                             tak ada lagi rasa gundah
                         </div>
                     </div>
-                    
-                    <!-- Pengganti Audio Player Box -->
-                    <div class="badge-coming-soon">
-                        🎵 Demo Audio Sedang Direkam (Segera Rilis)
-                    </div>
+                    <div class="badge-coming-soon">🎵 Audio Segera Rilis</div>
                 </div>
+
+                <!-- Lagu 2: Vibe Rumah/Maroon Hangat -->
+                <div class="card vibe-rumah">
+                    <h3>"Menuju Pulang"</h3>
+                    <p style="font-size: 0.9rem; color: #ff8a80; margin-bottom: 1.5rem; font-weight: 500;">
+                        Vibe: Warm Ballad / Akustik<br>
+                        Usulan Progresi: Fmaj7 - Em7 - Dm7 - Cmaj7
+                    </p>
+                    <div class="lyric-container">
+                        <div class="lyric-stanza">
+                            <div class="lyric-tag">[Verse 1]</div>
+                            perjalanan menuju rumah yang dinantikan<br>
+                            banyak sudah angan bertebaran di fikiran<br>
+                            ingin seru seruan<br>
+                            bersama dia yang tercantik<br>
+                            walau hari sedang tak baik
+                        </div>
+                        <div class="lyric-stanza">
+                            <div class="lyric-tag">[Bridge]</div>
+                            rumah bukan yang utama<br>
+                            namun siapa yang ada di dalamnya<br>
+                            yang kan temani hari hari yang kan tiba
+                        </div>
+                        <div class="lyric-stanza">
+                            <div class="lyric-tag">[Chorus]</div>
+                            pulang yang kini terasa menyenangkan, menenangkan<br>
+                            karena kamu siap menyapaku disana<br>
+                            berikan pelukan penuh kehangatan<br><br>
+                            jika nanti datang badai menghadang, mengguncang<br>
+                            pastikan kita saling menjaga<br>
+                            untuk lewati semuaa duka
+                        </div>
+                    </div>
+                    <div class="badge-coming-soon">🎵 Audio Segera Rilis</div>
+                </div>
+
+                <!-- Lagu 3: Vibe Harmoni/Biru Teal -->
+                <div class="card vibe-harmoni">
+                    <h3>"Kisah Harmoni"</h3>
+                    <p style="font-size: 0.9rem; color: #4fc3f7; margin-bottom: 1.5rem; font-weight: 500;">
+                        Vibe: Cheerful Acoustic<br>
+                        Usulan Progresi: E - G#m - F#m - B
+                    </p>
+                    <div class="lyric-container">
+                        <div class="lyric-stanza">
+                            <div class="lyric-tag">[Verse 1]</div>
+                            ceria bermuara di cerita kita<br>
+                            berdua berjalan arungi sungai cinta<br>
+                            waktu terasa berjalan lebih lama<br>
+                            semua terlihat lebih berwarna
+                        </div>
+                        <div class="lyric-stanza">
+                            <div class="lyric-tag">[Bridge]</div>
+                            kini kita sedang jalani kisah harmoni<br>
+                            semoga kita akan terus begini
+                        </div>
+                        <div class="lyric-stanza">
+                            <div class="lyric-tag">[Chorus]</div>
+                            tetaplah disini bersamaku<br>
+                            jalani hari hari yang akan seru<br>
+                            biar waktu bawa kita<br>
+                            terus menuju arah yang sama<br><br>
+                            bila nanti dunia terasa berbeda<br>
+                            kita akan tetap sama<br>
+                            berdua kita kan jaga rasa<br>
+                            cinta ini untuk waktu yang lama
+                        </div>
+                    </div>
+                    <div class="badge-coming-soon">🎵 Audio Segera Rilis</div>
+                </div>
+
             </div>
         </section>
 
-        <!-- FAQ Section Baru -->
+        <!-- FAQ -->
         <section id="faq">
             <h2>Tanya Jawab (FAQ)</h2>
-            <p class="content-text">Beberapa hal yang sering ditanyakan klien sebelum memulai proyek.</p>
-            
             <div style="max-width: 800px; width: 100%; margin-top: 2rem;">
                 <div class="faq-item">
                     <button class="faq-question">Bagaimana dengan hak cipta liriknya? <span>+</span></button>
                     <div class="faq-answer">
-                        <p>Sistem standarnya adalah <i>Ghostwriting</i>, yang berarti klien bebas memiliki hak penuh 100% atas lagu tersebut tanpa perlu mencantumkan nama saya. Jika ingin memasukkan saya sebagai <i>Co-writer</i>, biayanya bisa disesuaikan.</p>
+                        <p>Sistem standarnya adalah <i>Ghostwriting</i>, klien memiliki hak penuh atas lagu tersebut. Jika ingin mencantumkan saya sebagai <i>Co-writer</i>, biayanya bisa didiskusikan.</p>
                     </div>
                 </div>
                 <div class="faq-item">
-                    <button class="faq-question">Apakah ada batas jumlah revisi? <span>+</span></button>
+                    <button class="faq-question">Berapa batas revisinya? <span>+</span></button>
                     <div class="faq-answer">
-                        <p>Setiap paket dilengkapi dengan maksimal 2x revisi minor (seperti mengubah diksi atau menyesuaikan ketukan). Jika ingin merombak seluruh tema dari awal, akan dihitung sebagai proyek baru.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">Berapa lama waktu pengerjaannya? <span>+</span></button>
-                    <div class="faq-answer">
-                        <p>Untuk penulisan lirik saja biasanya memakan waktu 3-5 hari kerja. Untuk paket pembuatan lirik beserta progresi melodi akustik, estimasi pengerjaan adalah 7-10 hari kerja.</p>
+                        <p>Terdapat maksimal 2x revisi minor (seperti mengubah diksi atau menyesuaikan ketukan).</p>
                     </div>
                 </div>
             </div>
@@ -448,112 +493,69 @@
             <form action="#" method="POST" id="contactForm">
                 <input type="text" placeholder="Nama Kamu atau Band" required>
                 <input type="email" placeholder="Email" required>
-                <textarea rows="4" placeholder="Ceritakan sedikit tentang lagumu (genre, mood, atau tema)..." required></textarea>
+                <textarea rows="4" placeholder="Ceritakan sedikit tentang lagumu..." required></textarea>
                 <button type="submit" class="btn">Kirim Pesan</button>
             </form>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 LirikKu. Dirancang dengan sepenuh hati.</p>
     </footer>
 
     <!-- JavaScript -->
     <script>
-        // 1. SPA Navigation Logic
         function switchPage(pageId) {
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => {
-                section.classList.remove('active-page');
-            });
-
-            const activeSection = document.getElementById(pageId);
-            if(activeSection) {
-                activeSection.classList.add('active-page');
-            }
-
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active-page'));
+            document.getElementById(pageId).classList.add('active-page');
+            
+            document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active-link');
-                if (link.getAttribute('href') === '#' + pageId) {
-                    link.classList.add('active-link');
-                }
+                if (link.getAttribute('href') === '#' + pageId) link.classList.add('active-link');
             });
-
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 2. Typewriter Effect Logic
         const words = ["Melodimu", "Ceritamu", "Keresahanmu"];
-        let i = 0;
-        let timer;
-        
+        let i = 0, timer;
         function typingEffect() {
             let word = words[i].split("");
-            var loopTyping = function() {
-                if (word.length > 0) {
-                    document.getElementById('typewriter').innerHTML += word.shift();
-                } else {
-                    setTimeout(deletingEffect, 2000); // Tunggu 2 detik sebelum dihapus
-                    return false;
-                };
-                timer = setTimeout(loopTyping, 150);
+            var loop = function() {
+                if (word.length > 0) document.getElementById('typewriter').innerHTML += word.shift();
+                else { setTimeout(deletingEffect, 2000); return false; }
+                timer = setTimeout(loop, 150);
             };
-            loopTyping();
+            loop();
         }
-
         function deletingEffect() {
             let word = words[i].split("");
-            var loopDeleting = function() {
+            var loop = function() {
                 if (word.length > 0) {
                     word.pop();
                     document.getElementById('typewriter').innerHTML = word.join("");
                 } else {
-                    if (words.length > (i + 1)) {
-                        i++;
-                    } else {
-                        i = 0;
-                    };
-                    typingEffect();
-                    return false;
-                };
-                timer = setTimeout(loopDeleting, 100);
+                    i = (words.length > (i + 1)) ? i + 1 : 0;
+                    typingEffect(); return false;
+                }
+                timer = setTimeout(loop, 100);
             };
-            loopDeleting();
+            loop();
         }
-        // Jalankan animasi ketik saat pertama kali dimuat
         typingEffect();
 
-        // 3. FAQ Accordion Logic
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
+        document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
                 const parent = question.parentElement;
-                
-                // Tutup FAQ lain jika terbuka
                 document.querySelectorAll('.faq-item').forEach(item => {
-                    if(item !== parent) {
-                        item.classList.remove('active');
-                        item.querySelector('span').innerText = '+';
-                    }
+                    if(item !== parent) { item.classList.remove('active'); item.querySelector('span').innerText = '+'; }
                 });
-
-                // Toggle FAQ yang di-klik
                 parent.classList.toggle('active');
-                if(parent.classList.contains('active')) {
-                    question.querySelector('span').innerText = '-';
-                } else {
-                    question.querySelector('span').innerText = '+';
-                }
+                question.querySelector('span').innerText = parent.classList.contains('active') ? '-' : '+';
             });
         });
 
-        // 4. Contact Form Simulation
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Terima kasih! Pesan kamu sudah terkirim.');
-            this.reset();
+            e.preventDefault(); alert('Terima kasih! Pesan kamu sudah terkirim.'); this.reset();
         });
     </script>
 </body>
